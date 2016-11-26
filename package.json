@@ -1,0 +1,53 @@
+{
+  "name": "cotd-react-es6",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Catch of the day fresh fish market place with React and Webpack",
+  "scripts": {
+    "start": "react-scripts start",
+    "watch": "concurrently --names 'webpack, stylus' --prefix name 'npm run start' 'npm run styles:watch'",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "styles": "stylus -u autoprefixer-stylus ./src/css/style.styl -o ./src/css/style.css",
+    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/css/style.styl -o ./src/css/style.css"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/react-scripts/config/eslint.js"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "es6"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mehmettugrulsahin/cotd-react-es6.git"
+  },
+  "author": {
+    "name": "Mehmet Tuğrul Şahin",
+    "url": "https://github.com/mehmettugrulsahin",
+    "email": "mehmettugrulsahin@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Mehmet Tuğrul Şahin",
+      "url": "https://github.com/mehmettugrulsahin",
+      "email": "mehmettugrulsahin@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.11.0",
+    "concurrently": "^3.1.0",
+    "react-scripts": "^0.7.0",
+    "stylus": "^0.54.5"
+  },
+  "dependencies": {
+    "history": "^4.4.1",
+    "re-base": "^2.3.3",
+    "react": "^15.4.1",
+    "react-addons-css-transition-group": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.0"
+  }
+}
