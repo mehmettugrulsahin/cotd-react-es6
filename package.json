@@ -1,6 +1,6 @@
 {
   "name": "cotd-react-es6",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "description": "Catch of the day fresh fish market place with React and Webpack",
   "scripts": {
