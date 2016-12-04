@@ -37,7 +37,7 @@ class Order extends React.Component {
               {count}            
             </span>
           </CSSTransitionGroup>
-           lbs {fish.name} {removeButton}
+           &nbsp;lbs {fish.name} {removeButton}
         </span>
 
         <span className="price">
@@ -86,5 +86,11 @@ class Order extends React.Component {
     )
   }
 }
+
+Order.propTypes = {
+  fishes: React.PropTypes.object.isRequired,
+  order: React.PropTypes.object.isRequired,
+  removeFromOrder: React.PropTypes.func.isRequired
+};
 
 export default Order;
