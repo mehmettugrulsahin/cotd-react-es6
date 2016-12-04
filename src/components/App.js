@@ -7,90 +7,105 @@ import Fish from './Fish';
 import base from '../base';
 
 class App extends React.Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.addFish = this.addFish.bind(this);
-        this.loadSamples = this.loadSamples.bind(this);
-        this.addToOrder = this.addToOrder.bind(this);
+    this.addFish = this.addFish.bind(this);
+    this.loadSamples = this.loadSamples.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
+    this.updateFish = this.updateFish.bind(this);
 
-        this.state = {
-            fishes: {},
-            order: {}
-        };
+    this.state = {
+      fishes: {},
+      order: {}
+    };
+  }
+
+  componentWillMount () {
+    const {storeId} = this.props.params;
+
+    this.ref = base.syncState(`${storeId}/fishes`, {
+      context: this,
+      state: 'fishes'
+    });
+
+    const localStorageRef = localStorage.getItem(`order-${storeId}`);
+
+    if (localStorageRef) {
+      this.setState({
+        order: JSON.parse(localStorageRef)
+      });
     }
+  }
 
-    componentWillMount () {
-        const {storeId} = this.props.params;
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
 
-        this.ref = base.syncState(`${storeId}/fishes`, {
-            context: this,
-            state: 'fishes'
-        });
+  componentWillUpdate(nextProps, nextState) {
+    const {storeId} = this.props.params;
 
-        const localStorageRef = localStorage.getItem(`order-${storeId}`);
+    localStorage.setItem(`order-${storeId}`, JSON.stringify(nextState.order));
+  }
 
-        if (localStorageRef) {
-            this.setState({
-                order: JSON.parse(localStorageRef)
-            });
-        }
-    }
+  addFish(fish) {
+    const fishes = {...this.state.fishes};
+    const timestamp = Date.now();
+    fishes[`fish-${timestamp}`] = fish;
+    this.setState({fishes});
+  }
 
-    componentWillUnmount() {
-        base.removeBinding(this.ref);
-    }
+  updateFish(key, updatedFish) {
+    const fishes = {...this.state.fishes};
+    fishes[key] = updatedFish;
+    this.setState({fishes});
+  }
 
-    componentWillUpdate(nextProps, nextState) {
-        const {storeId} = this.props.params;
+  addToOrder(key) {
+    const order = {...this.state.order};
+    order[key] = order[key] + 1 || 1;
+    this.setState({order});
+  }
 
-        localStorage.setItem(`order-${storeId}`, JSON.stringify(nextState.order));
-    }
+  loadSamples() {
+    this.setState({
+      fishes: sampleFishes
+    });
+  }
 
-    addFish(fish) {
-        const fishes = {...this.state.fishes};
-        const timestamp = Date.now();
-        fishes[`fish-${timestamp}`] = fish;
-        this.setState({fishes});
-    }
+  render() {
+    return (
+      <div className="catch-of-the-day">
+        <div className="menu">
+          <Header tagline="Fresh Seafood Market"/>
+          <ul className="list-of-fishes">
+            {
+              Object
+                .keys(this.state.fishes)
+                .map(key => <Fish
+                  addToOrder={this.addToOrder}
+                  index={key}
+                  key={key} 
+                  details={this.state.fishes[key]} />)
+            }                        
+          </ul>
+        </div>
 
-    addToOrder(key) {
-        const order = {...this.state.order};
-        order[key] = order[key] + 1 || 1;
-        this.setState({order});
-    }
+        <Order 
+          fishes={this.state.fishes}
+          order={this.state.order} 
+          params={this.props.params} 
+        />
 
-    loadSamples() {
-        this.setState({
-            fishes: sampleFishes
-        });
-    }
-
-    render() {
-        return (
-            <div className="catch-of-the-day">
-                <div className="menu">
-                    <Header tagline="Fresh Seafood Market"/>
-                    <ul className="list-of-fishes">
-                        {
-                            Object
-                                .keys(this.state.fishes)
-                                .map(key => <Fish
-                                        addToOrder={this.addToOrder}
-                                        index={key}
-                                        key={key} 
-                                        details={this.state.fishes[key]} />)
-                        }                        
-                    </ul>
-                </div>
-                <Order 
-                    fishes={this.state.fishes} 
-                    order={this.state.order} 
-                    params={this.props.params} />
-                <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
-            </div>
-        )
-    }
+        <Inventory 
+          addFish={this.addFish}
+          loadSamples={this.loadSamples}
+          fishes={this.state.fishes}
+          updateFish={this.updateFish}
+        />
+      </div>
+    )
+  }
 }
 
 export default App;
