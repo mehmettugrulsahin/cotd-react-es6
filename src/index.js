@@ -8,15 +8,15 @@ import StorePicker from './components/StorePicker';
 import NotFound from './components/NotFound';
 
 const Root = () => {
-    return (
-        <BrowserRouter>
-            <div>
-                <Match exactly pattern="/" component={StorePicker} />
-                <Match pattern="/store/:storeId" component={App} />
-                <Miss component={NotFound} />
-            </div>
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <div>
+        <Match exactly pattern="/" component={StorePicker} />
+        <Match pattern="/store/:storeId" component={App} />
+        <Miss component={NotFound} />
+      </div>
+    </BrowserRouter>
+  )
 }
 
 render(<Root />, document.querySelector('#main'));
