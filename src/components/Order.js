@@ -3,12 +3,13 @@ import {formatPrice} from '../helpers';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Order extends React.Component {
-  constructor() {
-    super();
-    this.renderOrder = this.renderOrder.bind(this);
-  }
+  static propTypes = {
+    fishes: React.PropTypes.object.isRequired,
+    order: React.PropTypes.object.isRequired,
+    removeFromOrder: React.PropTypes.func.isRequired
+  };
 
-  renderOrder(key) {
+  renderOrder = (key) => {
     const {fishes, order} = this.props;
 
     const fish = fishes[key];
@@ -86,11 +87,5 @@ class Order extends React.Component {
     )
   }
 }
-
-Order.propTypes = {
-  fishes: React.PropTypes.object.isRequired,
-  order: React.PropTypes.object.isRequired,
-  removeFromOrder: React.PropTypes.func.isRequired
-};
 
 export default Order;
