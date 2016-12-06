@@ -42,15 +42,15 @@ pushstate-server build
 ```
 Navigate to [localhost](http://localhost:9000)
 
-## Run in production
-Navigate to [production](https://ns-qudjezhwtd.now.sh)
+## Run in production - now.sh
+Navigate to [now.sh](https://ns-qudjezhwtd.now.sh)
 
-## Deploy to production
+## Deploy to production - now.sh
 ```
 sudo npm install -g now-serve
 sudo npm install -g now
 
-yarn deploy
+yarn deploy:now
 ```
 
 Checkout the NEW production url from the deploy output
@@ -66,3 +66,11 @@ Checkout the NEW production url from the deploy output
 > Deployment complete!
 ```
 Navigate to the NEW production url 
+
+## Run in production - gh-pages
+Navigate to [gh-pages](https://mehmettugrulsahin.github.io/cotd-react-es6/)
+
+## Deploy to production - gh-pages
+```
+yarn deploy:github
+```
