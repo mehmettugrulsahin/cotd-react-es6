@@ -26,5 +26,43 @@ yarn install
 yarn start
 ```
 
-## Run
+## Run on localhost
 Navigate to [localhost](http://localhost:3000)
+
+## Build for production
+```
+yarn build
+```
+
+## Serve production build locally
+```
+sudo npm install -g pushstate-server
+
+pushstate-server build
+```
+Navigate to [localhost](http://localhost:9000)
+
+## Run in production
+Navigate to [production](https://ns-qudjezhwtd.now.sh)
+
+## Deploy to production
+```
+sudo npm install -g now-serve
+sudo npm install -g now
+
+yarn deploy
+```
+
+Checkout the NEW production url from the deploy output
+```
+> Ready! https://ns-[xxxxxxxxxx].now.sh (copied to clipboard) [2s]
+> Upload [====================] 100% 0.0s
+> Sync complete (522.28kB) [3s]
+> Initializing…
+> Building
+> ▲ npm install
+> Installing package list@latest
+> ▲ npm start
+> Deployment complete!
+```
+Navigate to the NEW production url 

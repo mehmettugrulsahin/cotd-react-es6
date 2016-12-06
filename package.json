@@ -1,6 +1,7 @@
 {
   "name": "cotd-react-es6",
-  "version": "0.25.0",
+  "version": "0.26.0",
+  "homepage": "https://ns-qudjezhwtd.now.sh",
   "private": true,
   "description": "Catch of the day fresh fish market place with React and Webpack",
   "scripts": {
@@ -9,7 +10,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "styles": "stylus -u autoprefixer-stylus ./src/css/style.styl -o ./src/css/style.css",
-    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/css/style.styl -o ./src/css/style.css"
+    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/css/style.styl -o ./src/css/style.css",
+    "deploy": "ns ./build --cmd 'list ./content -s'"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
@@ -35,7 +37,7 @@
       "email": "mehmettugrulsahin@gmail.com"
     }
   ],
-  "license": "MIT",
+  "license": "MIT",  
   "devDependencies": {
     "autoprefixer-stylus": "^0.11.0",
     "concurrently": "^3.1.0",
